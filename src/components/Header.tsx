@@ -5,7 +5,7 @@ import MainNav from "./MainNav";
 //div 1 - span full width of screen, align content of header within content of the page
 //div#2 - uses flexbox to position direct children of div -- justify in between aligning items to center
 //link bold text orange 500 weight tracking-tight to reflect logo. Link to / homepage
-//nav hidden default until med screen
+//nav hidden default on small screens, visible on medium screens
 const Header = () => {
   return (
     <div className="border-b-2 border-b-orange-500 py-6">
