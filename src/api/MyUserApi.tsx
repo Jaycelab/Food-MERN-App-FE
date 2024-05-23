@@ -3,7 +3,7 @@ import { useMutation } from "react-query";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 type CreateUserRequest = {
-  autho0Id: string;
+  auth0Id: string;
   email: string;
 };
 
@@ -31,5 +31,10 @@ export const useCreateMyUser = () => {
   } = useMutation(createMyUserRequest);
 
   //returning mutateAsync function and loading, error, and success states
-  return { createUser, isLoading, isError, isSuccess };
+  return {
+    createUser,
+    isLoading,
+    isError,
+    isSuccess,
+  };
 };
