@@ -1,5 +1,6 @@
 import { AppState, Auth0Provider, User } from "@auth0/auth0-react";
 import { useCreateMyUser } from "@/api/MyUserApi";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   //children is a special property that is passed to components automatically
@@ -9,7 +10,7 @@ type Props = {
 //wrap all components to access Auth0Provider
 const Auth0ProviderWithNavigate = ({ children }: Props) => {
   //custom hoook
-  const { createUser } = useCreateMyUser();
+  const navigate = useNavigate();
   //storing Auth0 domain in environment variable
   const domain = import.meta.env.VITE_AUTH0_DOMAIN;
   const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
@@ -21,11 +22,9 @@ const Auth0ProviderWithNavigate = ({ children }: Props) => {
       "Please define the Auth0 domain, clientId, and redirectUri in your .env file"
     );
   }
-
+  //whenver user gets redirected, take user to callback page
   const onRedirectCallback = (appState?: AppState, user?: User) => {
-    if (user?.sub && user?.email) {
-      createUser({ auth0Id: user.sub, email: user.email });
-    }
+    navigate("/auth-callback");
   };
 
   return (
